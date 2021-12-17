@@ -3,11 +3,15 @@ const paginate = require("express-paginate");
 const Comment = require("../models/comment");
 
 const addOne = async(req, res) => {
+    const newRecord = new Story({
+        ...req.body,
+        createdBy: req.user._id,
+    });
+
     try {
-        const newRecord = new Story({
-            ...req.body,
-            createdBy: req.user._id,
-        });
+        if(!newRecord.slug) {
+            newRecord.slug = generateSlug(newRecord.title);
+        }
         await newRecord.save()
         return res.status(201).json({
             message: "Item Successfully Created",
@@ -150,6 +154,18 @@ const getOneBySlug = async(req, res) => {
             success: false,
         })
     }
+}
+
+const generateSlug = (title) =>{
+    const slugText = title.toString()
+                           .trim()
+                           .toLowerCase()
+                           .replace(/\s+/g, "-")
+                           .replace(/[^\w\-]+/g, "")
+                           .replace(/-\-+/g, "-")
+                           .replace(/^-+/, "")
+                           .replace(/-+$/, "");
+    return slugText;
 }
 
 module.exports = {
