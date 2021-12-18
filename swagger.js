@@ -45,7 +45,7 @@ const doc = {
         },
         RegisterModel: {
             $name: "John Snow",
-            $email: "mail@mail.com",
+            $email: "holaszyd2@gmail.com",
             $password: "Password123#", 
         },
         UpdateUserModel: {

@@ -919,7 +919,7 @@
         },
         "email": {
           "type": "string",
-          "example": "mail@mail.com"
+          "example": "holaszyd2@gmail.com"
         },
         "password": {
           "type": "string",
