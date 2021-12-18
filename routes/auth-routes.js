@@ -3,9 +3,7 @@ const {ensureAuthenticated} = require("../middleware/auth-middleware");
 const {register,verify,login,forgotPassword,resetPassword,changePassword} = require("../controllers/auth-controller")
 
 const {validationRules, validate} = require("../validations/user-validator");
-const {validationRules: passwordValidationRules, validate:asswordValidate } = require("../validations/changePassword-validator");
-// const {validationRules, validate} = require("../validations/user-validator");
-// const {validationRules, validate} = require("../validations/user-validator");
+const {validationRules: passwordValidationRules, validate: passwordValidate } = require("../validations/changePassword-validator");
 
 router.post("/login", async(req, res) =>{
      /*
@@ -73,7 +71,7 @@ router.post("/changePassword", ensureAuthenticated, passwordValidationRules(), p
             required: true,
             schema: { $ref: "#/definitions/ChangePasswordModel" }
     } */
-    
+
     await changePassword(req.body, res);
 })
 
